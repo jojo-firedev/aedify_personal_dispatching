@@ -1,5 +1,9 @@
 # MVP of a Full Stack Personal Dispatching
 
+## Docs
+
+API Docs with SwaggerUI while running backend on: [http://127.0.0.1:8000/swagger](http://127.0.0.1:8000/swagger/)
+
 ## Setup
 
 ### Dev Enviroment
