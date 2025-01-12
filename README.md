@@ -18,4 +18,5 @@
 - Install Flutter Framework in Version 3.27.1
 - Go to app/ folder: `cd app`
 - Install all dependencies: `flutter pub get`
+- Generate Build Files: `dart run build_runner build`
 - Run app: `flutter run`
