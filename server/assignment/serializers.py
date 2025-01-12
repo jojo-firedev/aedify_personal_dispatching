@@ -6,12 +6,12 @@ from .models import Assignment, Personnel, Project
 class PersonnelSerializer(serializers.ModelSerializer):
     class Meta:
         model = Personnel
-        fields = ["name"]
+        fields = ["id", "name"]
 
 class ProjectSerializer(serializers.ModelSerializer):
     class Meta:
         model= Project
-        fields= ['name']
+        fields= ["id", "name"]
 
 class AssignmentSerializer(serializers.ModelSerializer):
     status = serializers.ChoiceField(choices=Assignment.STATUS_CHOICES)
