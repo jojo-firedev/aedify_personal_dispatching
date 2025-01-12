@@ -17,8 +17,8 @@ class Assignment(models.Model):
     personnel = models.ForeignKey(Personnel, on_delete=models.CASCADE) # identifier for the personnel
     project = models.ForeignKey(Project, on_delete=models.CASCADE) # identifier for the project
     role = models.CharField(max_length=80) # required, e.g., 'Foreman', 'Laborer', etc.
-    start_time = models.DateTimeField() # when the assignment starts
-    end_time = models.DateTimeField(blank=True, null=True) # when the assignment ends, optional
+    start_time = models.DateField() # when the assignment starts
+    end_time = models.DateField(blank=True, null=True) # when the assignment ends, optional
     status = models.CharField(
         max_length=10,
         choices=STATUS_CHOICES,
