@@ -15,7 +15,7 @@ class AssignmentApiService {
   }
 
   Future<Assignment> fetchAssignment(String id) async {
-    Response response = await apiService.get('assignment/$id');
+    Response response = await apiService.get('assignment/$id/');
 
     return Assignment.fromJson(response.data);
   }
@@ -27,12 +27,13 @@ class AssignmentApiService {
   }
 
   Future<AssignmentCreate> updateAssignment(AssignmentCreate data) async {
-    Response response = await apiService.put('assignment/', data.toJson());
+    Response response =
+        await apiService.put('assignment/${data.id}', data.toJson());
 
     return AssignmentCreate.fromJson(response.data);
   }
 
   Future<void> deleteAssignment(int id) async {
-    await apiService.delete('assignment/$id');
+    await apiService.delete('assignment/$id/');
   }
 }
