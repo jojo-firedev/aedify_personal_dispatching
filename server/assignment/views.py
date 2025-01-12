@@ -1,37 +1,20 @@
-from rest_framework import generics
+from rest_framework import viewsets
 
-from .serializers import AssignmentSerializer, PersonnelSerializer, ProjectSerializer
+from .serializers import AssignmentCreateUpdateSerializer, AssignmentSerializer, PersonnelSerializer, ProjectSerializer
 from .models import Assignment, Personnel, Project
 
-class PersonnelListCreateAPIView(generics.ListCreateAPIView):
+class PersonnelViewSet(viewsets.ModelViewSet):
     queryset = Personnel.objects.all()
     serializer_class = PersonnelSerializer
-    
-class PersonnelRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Personnel.objects.all()
-    serializer_class = PersonnelSerializer
-    lookup_field = 'id'
-    
 
-class ProjectListCreateAPIView(generics.ListCreateAPIView):
+class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all()
     serializer_class = ProjectSerializer
-    
-class ProjectRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Project.objects.all()
-    serializer_class = ProjectSerializer
-    lookup_field = 'id'
-    
 
-class AssignmentListCreateAPIView(generics.ListCreateAPIView):
+class AssignmentViewSet(viewsets.ModelViewSet):
     queryset = Assignment.objects.all()
-    serializer_class = AssignmentSerializer
     
-class AssignmentRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Assignment.objects.all()
-    serializer_class = AssignmentSerializer
-    lookup_field = 'id'
-    
-    
-    
-    
+    def get_serializer_class(self):
+        if self.action in ['create', 'update', 'partial_update']:
+            return AssignmentCreateUpdateSerializer
+        return AssignmentSerializer

@@ -17,6 +17,22 @@ class AssignmentSerializer(serializers.ModelSerializer):
     status = serializers.ChoiceField(choices=Assignment.STATUS_CHOICES)
     personnel = PersonnelSerializer(read_only=True)
     project = ProjectSerializer(read_only=True)
+    
+    class Meta:
+        model = Assignment
+        fields = [
+            'id',
+            'personnel',
+            'project',
+            'role',
+            'start_time',
+            'end_time',
+            'status', 
+        ]
+
+class AssignmentCreateUpdateSerializer(serializers.ModelSerializer):
+    status = serializers.ChoiceField(choices=Assignment.STATUS_CHOICES)
+    
     class Meta:
         model = Assignment
         fields = [

@@ -1,23 +1,14 @@
-from django.urls import path
+from django.urls import path, include
+
+from rest_framework import routers
 from . import views
 
+router = routers.DefaultRouter()
+router.register(r'personnel', views.PersonnelViewSet)
+router.register(r'project', views.ProjectViewSet)
+router.register(r'assignment', views.AssignmentViewSet)
+
+# URL patterns
 urlpatterns = [
-    path('personnel/', views.PersonnelListCreateAPIView.as_view(), name="personnel-list"),
-    path(
-        "personnel/<int:id>/",
-        views.PersonnelRetrieveUpdateDestroyAPIView.as_view(),
-        name="personnel-detail",
-    ),
-    path('project/', views.ProjectListCreateAPIView.as_view(), name="project-list"),
-    path(
-        "project/<int:id>/",
-        views.ProjectRetrieveUpdateDestroyAPIView.as_view(),
-        name="project-detail",
-    ),
-    path('assignment/', views.AssignmentListCreateAPIView.as_view(), name="assignment-list"),
-    path(
-        "assignment/<int:id>/",
-        views.AssignmentRetrieveUpdateDestroyAPIView.as_view(),
-        name="assignment-detail",
-    ),
+    path('', include(router.urls)),  # Include DRF router-generated URLs
 ]
