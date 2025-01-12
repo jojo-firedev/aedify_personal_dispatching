@@ -2,14 +2,22 @@ import 'package:aedify_personal_dispatching/presentation/assignment_list/assignm
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const MainApp());
+  runApp(const PersonalDispatchingApp());
 }
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+class PersonalDispatchingApp extends StatelessWidget {
+  const PersonalDispatchingApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: AssignmentListPage());
+    return MaterialApp(
+      home: AssignmentListPage(),
+      theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.deepPurple,
+          brightness: Brightness.dark,
+        ),
+      ),
+    );
   }
 }
