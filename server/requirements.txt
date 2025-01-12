@@ -1,4 +1,2 @@
-litestar
-databases
-sqlalchemy
-sqlite
+Django
+djangorestframework
