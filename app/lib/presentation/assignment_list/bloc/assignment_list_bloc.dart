@@ -13,12 +13,15 @@ class AssignmentListBloc
 
   AssignmentListBloc() : super(AssignmentListInitial()) {
     on<AssignmentLoadEvent>((event, emit) async {
+      // Fetch list of assignments from server and show
+
       emit(AssignmentListLoading());
       assignments = await _apiService.fetchAssignmentList();
 
       emit(AssignmentListLoaded(assignments));
     });
     on<AssignmentDeleteEvent>((event, emit) async {
+      // delete selected assignment and remove locally from assignments list
       emit(AssignmentListLoading());
       _apiService.deleteAssignment(event.id);
 

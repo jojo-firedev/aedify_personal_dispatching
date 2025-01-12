@@ -6,6 +6,7 @@ import 'package:intl/intl.dart';
 class AssignmentListPage extends StatelessWidget {
   AssignmentListPage({Key? key}) : super(key: key);
 
+  /// German Dateformat to parse DateTime Objects in the page
   final DateFormat dateFormat = DateFormat('dd.MM.yyyy');
 
   @override
@@ -39,6 +40,7 @@ class AssignmentListPage extends StatelessWidget {
                                 DataCell(Text(dateFormat.format(e.startTime))),
                                 DataCell(Text(dateFormat.format(e.endTime))),
                                 DataCell(Text(e.status)),
+                                // Delete button to delete the entry
                                 DataCell(
                                   Icon(Icons.delete),
                                   onTap: () => context

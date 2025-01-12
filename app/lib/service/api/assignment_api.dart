@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 class AssignmentApiService {
   ApiService apiService = ApiService();
 
+  /// get a list of assignments
   Future<List<Assignment>> fetchAssignmentList() async {
     Response response = await apiService.get('assignment/');
 
@@ -14,18 +15,21 @@ class AssignmentApiService {
         .toList();
   }
 
+  /// get a single assignment
   Future<Assignment> fetchAssignment(String id) async {
     Response response = await apiService.get('assignment/$id/');
 
     return Assignment.fromJson(response.data);
   }
 
+  /// create a new assignment
   Future<AssignmentCreate> postAssignment(AssignmentCreate data) async {
     Response response = await apiService.post('assignment/', data.toJson());
 
     return AssignmentCreate.fromJson(response.data);
   }
 
+  /// update an assignment with a put
   Future<AssignmentCreate> updateAssignment(AssignmentCreate data) async {
     Response response =
         await apiService.put('assignment/${data.id}', data.toJson());
@@ -33,6 +37,7 @@ class AssignmentApiService {
     return AssignmentCreate.fromJson(response.data);
   }
 
+  /// delete an assignment
   Future<void> deleteAssignment(int id) async {
     await apiService.delete('assignment/$id/');
   }
