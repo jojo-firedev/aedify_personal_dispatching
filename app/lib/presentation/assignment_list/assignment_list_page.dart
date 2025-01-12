@@ -12,35 +12,51 @@ class AssignmentListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => AssignmentListBloc()..add(AssignmentLoadEvent()),
-      child: Scaffold(
-          appBar: AppBar(title: Text('Aufgaben')),
-          body: BlocBuilder<AssignmentListBloc, AssignmentListState>(
-            builder: (context, state) {
-              if (state is AssignmentListLoaded) {
-                return DataTable(
-                    columns: [
-                      DataColumn(label: Text('Projekt')),
-                      DataColumn(label: Text('Zugewiesen an')),
-                      DataColumn(label: Text('Rolle')),
-                      DataColumn(label: Text('Start')),
-                      DataColumn(label: Text('Ende')),
-                      DataColumn(label: Text('Status')),
-                    ],
-                    rows: state.assignments
-                        .map((e) => DataRow(cells: [
-                              DataCell(Text(e.project.name)),
-                              DataCell(Text(e.personnel.name)),
-                              DataCell(Text(e.role)),
-                              DataCell(Text(dateFormat.format(e.startTime))),
-                              DataCell(Text(dateFormat.format(e.endTime))),
-                              DataCell(Text(e.status)),
-                            ]))
-                        .toList());
-              } else {
-                return Center(child: CircularProgressIndicator());
-              }
-            },
-          )),
+      child: Builder(builder: (context) {
+        return Scaffold(
+            appBar: AppBar(title: Text('Aufgaben')),
+            body: BlocBuilder<AssignmentListBloc, AssignmentListState>(
+              builder: (context, state) {
+                if (state is AssignmentListLoaded) {
+                  return SizedBox.expand(
+                    child: DataTable(
+                      columns: [
+                        DataColumn(label: Text('Projekt')),
+                        DataColumn(label: Text('Zugewiesen an')),
+                        DataColumn(label: Text('Rolle')),
+                        DataColumn(label: Text('Start')),
+                        DataColumn(label: Text('Ende')),
+                        DataColumn(label: Text('Status')),
+                        DataColumn(label: Text('')),
+                      ],
+                      rows: state.assignments
+                          .map(
+                            (e) => DataRow(
+                              cells: [
+                                DataCell(Text(e.project.name)),
+                                DataCell(Text(e.personnel.name)),
+                                DataCell(Text(e.role)),
+                                DataCell(Text(dateFormat.format(e.startTime))),
+                                DataCell(Text(dateFormat.format(e.endTime))),
+                                DataCell(Text(e.status)),
+                                DataCell(
+                                  Icon(Icons.delete),
+                                  onTap: () => context
+                                      .read<AssignmentListBloc>()
+                                      .add(AssignmentDeleteEvent(e.id)),
+                                ),
+                              ],
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  );
+                } else {
+                  return Center(child: CircularProgressIndicator());
+                }
+              },
+            ));
+      }),
     );
   }
 }

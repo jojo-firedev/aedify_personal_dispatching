@@ -9,14 +9,22 @@ part 'assignment_list_state.dart';
 class AssignmentListBloc
     extends Bloc<AssignmentListEvent, AssignmentListState> {
   final AssignmentApiService _apiService = AssignmentApiService();
-  List<Assignment>? assignments;
+  List<Assignment> assignments = [];
 
   AssignmentListBloc() : super(AssignmentListInitial()) {
     on<AssignmentLoadEvent>((event, emit) async {
       emit(AssignmentListLoading());
       assignments = await _apiService.fetchAssignmentList();
 
-      emit(AssignmentListLoaded(assignments!));
+      emit(AssignmentListLoaded(assignments));
+    });
+    on<AssignmentDeleteEvent>((event, emit) async {
+      emit(AssignmentListLoading());
+      _apiService.deleteAssignment(event.id);
+
+      assignments.removeWhere((item) => item.id == event.id);
+
+      emit(AssignmentListLoaded(assignments));
     });
   }
 }
