@@ -1,17 +1,15 @@
-import 'package:aedify_personal_dispatching/webmodels/personnel_model.dart';
-import 'package:aedify_personal_dispatching/webmodels/project_model.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'assignment_model.g.dart';
+part 'assignment_create_model.g.dart';
 
 @JsonSerializable()
-class Assignment {
+class AssignmentCreate {
   @JsonKey(name: "id")
-  final int id;
+  final int? id;
   @JsonKey(name: "personnel")
-  final Personnel personnel;
+  final int personnel;
   @JsonKey(name: "project")
-  final Project project;
+  final int project;
   @JsonKey(name: "role")
   final String role;
   @JsonKey(name: "start_time")
@@ -21,18 +19,18 @@ class Assignment {
   @JsonKey(name: "status")
   final String status;
 
-  Assignment({
-    required this.id,
+  AssignmentCreate({
     required this.personnel,
     required this.project,
     required this.role,
     required this.startTime,
     required this.endTime,
     required this.status,
+    this.id,
   });
 
-  factory Assignment.fromJson(Map<String, dynamic> json) =>
-      _$AssignmentFromJson(json);
+  factory AssignmentCreate.fromJson(Map<String, dynamic> json) =>
+      _$AssignmentCreateFromJson(json);
 
-  Map<String, dynamic> toJson() => _$AssignmentToJson(this);
+  Map<String, dynamic> toJson() => _$AssignmentCreateToJson(this);
 }
