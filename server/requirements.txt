@@ -1,2 +1,3 @@
 Django
-djangorestframework
+djangorestframework # Framework for CRUD APIs
+drf-yasg # Swagger API Docs
