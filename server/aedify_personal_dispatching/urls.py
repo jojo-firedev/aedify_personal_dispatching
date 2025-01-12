@@ -7,6 +7,7 @@ from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
 
+# Config for Swagger UI
 schema_view = get_schema_view(
     openapi.Info(
         title="AEDIFY Personal Dispatching API",
@@ -18,7 +19,7 @@ schema_view = get_schema_view(
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include( 'assignment.urls'))
+    path('', include( 'assignment.urls')) # import assignment app on base path
 ]
 
 # Swagger
