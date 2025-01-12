@@ -4,7 +4,7 @@ class ApiService {
   final Dio _dio = Dio();
 
   ApiService() {
-    _dio.options.baseUrl = 'http://127.0.0.1:8000';
+    _dio.options.baseUrl = 'http://127.0.0.1:8000/';
   }
 
   Future get(
